@@ -1,10 +1,8 @@
 import Data.List (sort)
 
--- Each pair is one 98-inch cane, with its shorter piece first.
 generator1 :: [(Int, Int, Int, Int)]
 generator1 = [(a, 98-a, c, 98-c) | a <- [1..49], c <- [1..49]]
 
--- Integer square root, avoiding rounding errors in Heron's formula.
 integerRoot :: Integer -> Integer
 integerRoot n = search 0 (n+1)
   where
@@ -14,7 +12,6 @@ integerRoot n = search 0 (n+1)
       | otherwise = search lo mid
       where mid = (lo+hi) `div` 2
 
--- Sixteen times the squared area, using integer arithmetic throughout.
 area16 :: [Int] -> Integer
 area16 sides = (a+b+c)*(-a+b+c)*(a-b+c)*(a+b-c)
   where [a,b,c] = map toInteger sides

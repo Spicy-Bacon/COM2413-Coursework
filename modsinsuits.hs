@@ -20,7 +20,6 @@ score (a,b)
   | snd a == snd b = 0
   | otherwise = modified a b + modified b a
 
--- Store each hand's score once, rather than repeatedly calculating it.
 scoredHands :: Char -> Char -> [(Hand, Rational)]
 scoredHands s t =
   [(hand, score hand) | a <- [1..13], b <- [1..13], let hand = ((s,a),(t,b))]
@@ -55,6 +54,5 @@ selector3 (jo@(j1,j2),bo@(b1,b2)) =
     remaining = filter (`notElem` dealt) cards
     j = score jo
 
--- These are initial games; selector3 proves suitable exchanges exist.
 main :: IO ()
 main = print (filter selector3 generator3)

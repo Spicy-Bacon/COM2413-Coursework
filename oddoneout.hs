@@ -17,14 +17,12 @@ reversiblePrimes = Set.filter (\s -> Set.member (reverse s) primeTriples) primeT
 generator4 :: [String]
 generator4 = Set.toAscList (primeTriples `Set.difference` reversiblePrimes)
 
--- Indices of the three rows, three downward columns and two downward diagonals.
 lineIndices :: [[Int]]
 lineIndices = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
 
 linesOf :: String -> [String]
 linesOf grid = [map (grid !!) indices | indices <- lineIndices]
 
--- Build George's grid row by row, pruning impossible column prefixes early.
 georgeGrids :: [String]
 georgeGrids =
   [grid
@@ -44,8 +42,6 @@ georgeGrids =
 replaceDigit :: Int -> Char -> String -> String
 replaceDigit i digit grid = take i grid ++ [digit] ++ drop (i+1) grid
 
--- Change one square, then enforce all of Martha's conditions.
--- This shared set is computed once for all calls to selector4.
 oddOnesOut :: Set.Set String
 oddOnesOut = Set.fromList
   [bad

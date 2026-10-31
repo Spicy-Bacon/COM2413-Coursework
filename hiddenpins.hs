@@ -1,6 +1,5 @@
 import Data.Char (isDigit)
 
--- Candidates need not yet satisfy the square relation: that is selector2's job.
 generator2 :: [(String, String)]
 generator2 =
   [(card, telephone)
@@ -14,7 +13,6 @@ generator2 =
   , let telephone = [w,x,y,z]
   ]
 
--- Preconditions about decreasing and disjoint digits are handled by generator2.
 selector2 :: (String, String) -> Bool
 selector2 (card, telephone)
   | not (fourDigits card && fourDigits telephone) = False
@@ -23,6 +21,5 @@ selector2 (card, telephone)
     root = read (drop 2 card) :: Int
     fourDigits s = length s == 4 && all isDigit s && head s /= '0'
 
--- The repeated-digit clue distinguishes one of the three printed candidate pairs.
 main :: IO ()
 main = print (filter selector2 generator2)
